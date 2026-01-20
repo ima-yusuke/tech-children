@@ -12,21 +12,58 @@ export default function Index({ posts, categories, popularTags }) {
             />
 
             {/* ヒーローセクション */}
-            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 py-16 text-white">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-24 text-white overflow-hidden">
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHptMCAyNGMwIDIuMjEtMS43OSA0LTQgNHMtNC0xLjc5LTQtNCAxLjc5LTQgNC00IDQgMS43OSA0IDR6bTAtMTJjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0xMiAxMmMwIDIuMjEtMS43OSA0LTQgNHMtNC0xLjc5LTQtNCAxLjc5LTQgNC00IDQgMS43OSA0IDR6bTAtMTJjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0wLTEyYzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHptMTIgMjRjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0wLTEyYzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+
+                <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
-                        <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+                            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            <span className="text-sm font-medium">学びを加速させる技術解説</span>
+                        </div>
+
+                        <h1 className="mb-6 text-5xl font-black tracking-tight sm:text-6xl md:text-7xl drop-shadow-lg">
                             Tech Children
                         </h1>
-                        <p className="mb-8 text-lg text-indigo-100 sm:text-xl">
+                        <p className="mb-4 text-xl text-white/90 sm:text-2xl font-medium max-w-3xl mx-auto">
                             エンジニア初学者のための技術用語解説サイト
                         </p>
-                        <Link
-                            href={route('search')}
-                            className="inline-block rounded-lg bg-white px-8 py-3 font-semibold text-indigo-600 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
-                        >
-                            記事を検索
-                        </Link>
+                        <p className="mb-10 text-base text-white/70 max-w-2xl mx-auto">
+                            Git、Docker、Laravel、Reactなど、現場で使える技術を分かりやすく解説
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <Link
+                                href={route('search')}
+                                className="group inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 font-bold text-indigo-600 shadow-2xl transition-all hover:bg-gray-50 hover:shadow-xl hover:scale-105"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                記事を検索
+                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </Link>
+                            <div className="flex items-center gap-6 text-sm text-white/80">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-medium">100+ 記事</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-medium">初心者向け</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,26 +72,39 @@ export default function Index({ posts, categories, popularTags }) {
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
                     {/* メインコンテンツ */}
                     <div className="lg:col-span-3">
-                        <h2 className="mb-8 text-2xl font-bold text-gray-900">最新の記事</h2>
+                        <div className="mb-8 flex items-center justify-between">
+                            <div>
+                                <h2 className="text-3xl font-bold text-gray-900 mb-2">最新の記事</h2>
+                                <p className="text-gray-600">学びを深める技術解説コンテンツ</p>
+                            </div>
+                        </div>
 
                         <div className="space-y-6">
                             {posts.data.map((post) => (
                                 <article
                                     key={post.id}
-                                    className="group overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-2xl"
+                                    className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all hover:shadow-2xl hover:border-gray-200 hover:-translate-y-1"
                                 >
-                                    <div className="p-6">
-                                        <div className="mb-3 flex items-center gap-2 text-sm">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                                    <div className="relative p-8">
+                                        <div className="mb-4 flex items-center gap-3 text-sm">
                                             {post.category && (
                                                 <Link
                                                     href={route('categories.show', post.category.slug)}
-                                                    className="rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-3 py-1 text-xs font-semibold text-white transition-all hover:shadow-lg"
+                                                    className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-3 py-1.5 text-xs font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
                                                 >
+                                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                                    </svg>
                                                     {post.category.name}
                                                 </Link>
                                             )}
-                                            <span className="text-gray-400">·</span>
-                                            <time className="text-gray-500">
+                                            <span className="text-gray-300">·</span>
+                                            <time className="text-gray-500 font-medium flex items-center gap-1.5">
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
                                                 {new Date(post.published_at).toLocaleDateString('ja-JP', {
                                                     year: 'numeric',
                                                     month: 'long',
@@ -63,14 +113,17 @@ export default function Index({ posts, categories, popularTags }) {
                                             </time>
                                         </div>
 
-                                        <h3 className="mb-3 text-xl font-bold text-gray-900 transition-colors group-hover:text-indigo-600">
-                                            <Link href={route('posts.show', post.slug)}>
-                                                {post.title}
+                                        <h3 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-indigo-600">
+                                            <Link href={route('posts.show', post.slug)} className="flex items-start gap-2">
+                                                <span className="flex-1">{post.title}</span>
+                                                <svg className="w-5 h-5 text-gray-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                </svg>
                                             </Link>
                                         </h3>
 
                                         {post.excerpt && (
-                                            <p className="mb-4 line-clamp-2 text-gray-600">
+                                            <p className="mb-5 line-clamp-2 text-gray-600 leading-relaxed">
                                                 {post.excerpt}
                                             </p>
                                         )}
@@ -80,59 +133,74 @@ export default function Index({ posts, categories, popularTags }) {
                                                 <Link
                                                     key={tag.id}
                                                     href={route('tags.show', tag.slug)}
-                                                    className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-indigo-100 hover:text-indigo-700"
+                                                    className="inline-flex items-center gap-1 rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-700 border border-gray-200 transition-all hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200"
                                                 >
-                                                    #{tag.name}
+                                                    <span className="text-gray-400">#</span>
+                                                    {tag.name}
                                                 </Link>
                                             ))}
                                             {post.tags.length > 3 && (
-                                                <span className="text-xs text-gray-500">
-                                                    +{post.tags.length - 3}
+                                                <span className="inline-flex items-center px-2 py-1 rounded-lg bg-gray-100 text-xs font-medium text-gray-500">
+                                                    +{post.tags.length - 3} more
                                                 </span>
                                             )}
                                         </div>
                                     </div>
+
+                                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent group-hover:via-indigo-300 transition-all"></div>
                                 </article>
                             ))}
                         </div>
 
                         {posts.data.length === 0 && (
-                            <div className="rounded-xl bg-white p-16 text-center shadow-md">
-                                <svg
-                                    className="mx-auto mb-4 h-16 w-16 text-gray-300"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                    />
-                                </svg>
-                                <p className="text-gray-500">記事がまだありません</p>
+                            <div className="rounded-2xl bg-white p-20 text-center shadow-sm border border-gray-100">
+                                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                                    <svg
+                                        className="w-10 h-10 text-gray-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">記事がまだありません</h3>
+                                <p className="text-gray-500">新しい記事をお楽しみに</p>
                             </div>
                         )}
                     </div>
 
                     {/* サイドバー */}
                     <aside className="lg:col-span-1">
-                        <div className="space-y-6">
+                        <div className="space-y-6 lg:sticky lg:top-24">
                             {/* カテゴリ */}
-                            <div className="overflow-hidden rounded-xl bg-white shadow-md">
-                                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
-                                    <h3 className="font-semibold text-white">カテゴリ</h3>
+                            <div className="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100">
+                                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-5 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+                                    <h3 className="font-bold text-white flex items-center gap-2 relative">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                        </svg>
+                                        カテゴリ
+                                    </h3>
                                 </div>
-                                <ul className="divide-y divide-gray-100 p-4">
+                                <ul className="divide-y divide-gray-50 p-2">
                                     {categories.map((category) => (
-                                        <li key={category.id} className="py-2">
+                                        <li key={category.id}>
                                             <Link
                                                 href={route('categories.show', category.slug)}
-                                                className="flex items-center justify-between text-gray-700 transition-colors hover:text-indigo-600"
+                                                className="group flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600"
                                             >
-                                                <span className="font-medium">{category.name}</span>
-                                                <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-semibold text-indigo-700">
+                                                <span className="font-semibold flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                                    {category.name}
+                                                </span>
+                                                <span className="px-2.5 py-1 rounded-lg bg-gray-100 group-hover:bg-indigo-100 text-xs font-bold text-gray-700 group-hover:text-indigo-700 transition-colors">
                                                     {category.posts_count}
                                                 </span>
                                             </Link>
@@ -142,23 +210,59 @@ export default function Index({ posts, categories, popularTags }) {
                             </div>
 
                             {/* 人気のタグ */}
-                            <div className="overflow-hidden rounded-xl bg-white shadow-md">
-                                <div className="bg-gradient-to-r from-pink-600 to-purple-600 px-6 py-4">
-                                    <h3 className="font-semibold text-white">人気のタグ</h3>
+                            <div className="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100">
+                                <div className="bg-gradient-to-r from-pink-600 to-purple-600 px-6 py-5 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+                                    <h3 className="font-bold text-white flex items-center gap-2 relative">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        人気のタグ
+                                    </h3>
                                 </div>
-                                <div className="flex flex-wrap gap-2 p-4">
+                                <div className="flex flex-wrap gap-2 p-5">
                                     {popularTags.map((tag) => (
                                         <Link
                                             key={tag.id}
                                             href={route('tags.show', tag.slug)}
-                                            className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-100 to-pink-100 px-3 py-1.5 text-sm font-medium text-purple-800 transition-all hover:from-purple-200 hover:to-pink-200 hover:shadow-md"
+                                            className="group inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 px-3 py-2 text-sm font-bold text-purple-800 transition-all hover:from-purple-100 hover:to-pink-100 hover:shadow-md hover:scale-105 hover:border-purple-200"
                                         >
-                                            #{tag.name}
-                                            <span className="ml-1 text-xs opacity-75">
+                                            <span className="text-purple-400 group-hover:text-purple-600 transition-colors">#</span>
+                                            {tag.name}
+                                            <span className="ml-0.5 px-1.5 py-0.5 rounded-md bg-white/60 text-xs font-bold text-purple-700">
                                                 {tag.posts_count}
                                             </span>
                                         </Link>
                                     ))}
+                                </div>
+                            </div>
+
+                            {/* プロモーションカード */}
+                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8 shadow-xl">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-600/20 rounded-full -mr-16 -mt-16"></div>
+                                <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-600/20 rounded-full -ml-12 -mb-12"></div>
+
+                                <div className="relative">
+                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center mb-4 shadow-lg">
+                                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <h4 className="text-lg font-bold text-white mb-2">
+                                        さらに学ぶ
+                                    </h4>
+                                    <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+                                        最新の技術トレンドと実践的な解説をチェック
+                                    </p>
+                                    <Link
+                                        href={route('search')}
+                                        className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-indigo-300 transition-colors group"
+                                    >
+                                        すべての記事を見る
+                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                        </svg>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
