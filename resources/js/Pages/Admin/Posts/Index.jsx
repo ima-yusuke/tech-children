@@ -119,6 +119,76 @@ export default function Index({ posts }) {
                                     <p className="text-gray-500">記事がありません</p>
                                 </div>
                             )}
+
+                            {/* ページネーション */}
+                            {posts.links.length > 3 && (
+                                <div className="mt-6 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+                                    <div className="flex flex-1 justify-between sm:hidden">
+                                        {posts.prev_page_url ? (
+                                            <Link
+                                                href={posts.prev_page_url}
+                                                className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                            >
+                                                前へ
+                                            </Link>
+                                        ) : (
+                                            <span className="relative inline-flex items-center rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-400">
+                                                前へ
+                                            </span>
+                                        )}
+                                        {posts.next_page_url ? (
+                                            <Link
+                                                href={posts.next_page_url}
+                                                className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                            >
+                                                次へ
+                                            </Link>
+                                        ) : (
+                                            <span className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-400">
+                                                次へ
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                                        <div>
+                                            <p className="text-sm text-gray-700">
+                                                <span className="font-medium">{posts.from}</span>
+                                                {' - '}
+                                                <span className="font-medium">{posts.to}</span>
+                                                {' / '}
+                                                <span className="font-medium">{posts.total}</span>
+                                                件中
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm">
+                                                {posts.links.map((link, index) => (
+                                                    <Link
+                                                        key={index}
+                                                        href={link.url || '#'}
+                                                        className={`relative inline-flex items-center px-4 py-2 text-sm font-medium ${
+                                                            link.active
+                                                                ? 'z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                                                                : link.url
+                                                                  ? 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0'
+                                                                  : 'text-gray-400 ring-1 ring-inset ring-gray-300 cursor-not-allowed'
+                                                        } ${
+                                                            index === 0
+                                                                ? 'rounded-l-md'
+                                                                : index === posts.links.length - 1
+                                                                  ? 'rounded-r-md'
+                                                                  : ''
+                                                        }`}
+                                                        preserveScroll
+                                                        disabled={!link.url}
+                                                        dangerouslySetInnerHTML={{ __html: link.label }}
+                                                    />
+                                                ))}
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
