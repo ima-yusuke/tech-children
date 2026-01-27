@@ -145,6 +145,11 @@ class PostController extends Controller
             ]);
         }
 
+        // 公開日時が指定されていない場合で、statusがpublishedに変更される場合は現在時刻を設定
+        if (empty($validated['published_at']) && $validated['status'] === 'published' && $post->status !== 'published') {
+            $validated['published_at'] = now();
+        }
+
         $post->update($validated);
 
         // タグの同期
