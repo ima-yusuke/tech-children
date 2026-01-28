@@ -14,7 +14,7 @@ class ArticleGeneratorService
     {
         $this->apiKey = config('services.gemini.api_key');
         // gemini-2.5-flash を使用（2025年6月リリースの最新安定版）
-        $this->apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent';
+        $this->apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
     }
 
     /**
