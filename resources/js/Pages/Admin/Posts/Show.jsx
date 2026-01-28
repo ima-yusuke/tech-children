@@ -1,5 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
+import 'highlight.js/styles/github.css';
 
 export default function Show({ post }) {
     return (
@@ -123,13 +128,58 @@ export default function Show({ post }) {
                                 </div>
                             )}
 
-                            {/* 本文 */}
+                            {/* 元ネタ */}
                             <div className="mb-8">
-                                <h4 className="text-lg font-semibold text-gray-900 mb-2">本文</h4>
-                                <div className="prose max-w-none rounded-lg border border-gray-200 p-6">
-                                    <div className="whitespace-pre-wrap">{post.content}</div>
+                                <h4 className="text-lg font-semibold text-gray-900 mb-2">元ネタ（コピペしたメモ）</h4>
+                                <div className="rounded-lg bg-gray-50 border border-gray-200 p-4 text-gray-700 whitespace-pre-wrap">
+                                    {post.content}
                                 </div>
                             </div>
+
+                            {/* AI生成記事 */}
+                            {post.generated_content && (
+                                <div className="mb-8">
+                                    <h4 className="text-lg font-semibold text-gray-900 mb-2">✨ AI生成記事（公開される内容）</h4>
+                                    <div className="prose prose-lg max-w-none rounded-lg border-2 border-purple-200 bg-purple-50 p-6">
+                                        <ReactMarkdown
+                                            remarkPlugins={[remarkGfm]}
+                                            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                                            components={{
+                                                code({ node, inline, className, children, ...props }) {
+                                                    return inline ? (
+                                                        <code className="bg-gray-100 text-red-600 px-1 py-0.5 rounded text-sm font-mono" {...props}>
+                                                            {children}
+                                                        </code>
+                                                    ) : (
+                                                        <code className={className} {...props}>
+                                                            {children}
+                                                        </code>
+                                                    );
+                                                },
+                                                strong({ children }) {
+                                                    return <strong className="font-bold text-gray-900">{children}</strong>;
+                                                },
+                                                blockquote({ children }) {
+                                                    return (
+                                                        <blockquote className="border-l-4 border-yellow-400 bg-yellow-50 pl-4 py-2 my-4">
+                                                            {children}
+                                                        </blockquote>
+                                                    );
+                                                },
+                                                pre({ children }) {
+                                                    return (
+                                                        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                                                            {children}
+                                                        </pre>
+                                                    );
+                                                },
+                                            }}
+                                        >
+                                            {post.generated_content}
+                                        </ReactMarkdown>
+                                    </div>
+                                </div>
+                            )}
 
                             {/* 編集履歴 */}
                             {post.revisions && post.revisions.length > 0 && (

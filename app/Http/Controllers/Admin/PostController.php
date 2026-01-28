@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\PostRevision;
+use App\Services\ArticleGeneratorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -52,6 +53,7 @@ class PostController extends Controller
             'slug' => 'nullable|string|unique:posts,slug',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
+            'generated_content' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
             'status' => 'required|in:draft,published,private',
             'published_at' => 'nullable|date',
@@ -123,6 +125,7 @@ class PostController extends Controller
             'slug' => 'nullable|string|unique:posts,slug,' . $post->id,
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
+            'generated_content' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
             'status' => 'required|in:draft,published,private',
             'published_at' => 'nullable|date',
@@ -170,5 +173,33 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.index')
             ->with('success', '記事を削除しました。');
+    }
+
+    /**
+     * AIで記事を生成
+     */
+    public function generateArticle(Request $request, ArticleGeneratorService $generator)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'raw_content' => 'required|string',
+        ]);
+
+        try {
+            $generatedContent = $generator->generateArticle(
+                $validated['raw_content'],
+                $validated['title']
+            );
+
+            return response()->json([
+                'success' => true,
+                'generated_content' => $generatedContent,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

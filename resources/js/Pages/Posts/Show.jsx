@@ -2,6 +2,11 @@ import FrontLayout from '@/Layouts/FrontLayout';
 import SEO from '@/Components/SEO';
 import { Link, useForm } from '@inertiajs/react';
 import { Calendar, Eye, Tag, MessageCircle, Send, User, Mail, ArrowRight, Clock } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
+import 'highlight.js/styles/github-dark.css';
 
 export default function Show({ post, comments, relatedPosts }) {
     const { data, setData, post: submit, processing } = useForm({
@@ -92,9 +97,77 @@ export default function Show({ post, comments, relatedPosts }) {
                 {/* 記事本文 */}
                 <article className="mb-12 overflow-hidden rounded-3xl bg-white shadow-xl border border-gray-100">
                     <div className="prose prose-lg max-w-none p-8 sm:p-12 lg:p-16">
-                        <div className="whitespace-pre-wrap leading-relaxed text-gray-800 text-lg">
-                            {post.content}
-                        </div>
+                        {post.generated_content ? (
+                            <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
+                                rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                                components={{
+                                    code({ node, inline, className, children, ...props }) {
+                                        return inline ? (
+                                            <code className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-sm font-mono border border-red-100" {...props}>
+                                                {children}
+                                            </code>
+                                        ) : (
+                                            <code className={className} {...props}>
+                                                {children}
+                                            </code>
+                                        );
+                                    },
+                                    strong({ children }) {
+                                        return <strong className="font-bold text-gray-900 bg-yellow-100 px-1">{children}</strong>;
+                                    },
+                                    blockquote({ children }) {
+                                        return (
+                                            <blockquote className="border-l-4 border-blue-400 bg-blue-50 pl-6 py-4 my-6 rounded-r-lg">
+                                                {children}
+                                            </blockquote>
+                                        );
+                                    },
+                                    pre({ children }) {
+                                        return (
+                                            <pre className="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto shadow-lg my-6">
+                                                {children}
+                                            </pre>
+                                        );
+                                    },
+                                    h2({ children }) {
+                                        return (
+                                            <h2 className="text-3xl font-bold mt-12 mb-6 pb-3 border-b-4 border-indigo-200 text-gray-900">
+                                                {children}
+                                            </h2>
+                                        );
+                                    },
+                                    h3({ children }) {
+                                        return (
+                                            <h3 className="text-2xl font-bold mt-10 mb-4 text-gray-900 flex items-center gap-3">
+                                                <span className="w-2 h-8 bg-gradient-to-b from-indigo-600 to-purple-600 rounded-full"></span>
+                                                {children}
+                                            </h3>
+                                        );
+                                    },
+                                    ul({ children }) {
+                                        return <ul className="space-y-3 my-6">{children}</ul>;
+                                    },
+                                    ol({ children }) {
+                                        return <ol className="space-y-3 my-6">{children}</ol>;
+                                    },
+                                    li({ children }) {
+                                        return (
+                                            <li className="flex items-start gap-3">
+                                                <span className="mt-2 w-2 h-2 rounded-full bg-indigo-600 flex-shrink-0"></span>
+                                                <span className="flex-1">{children}</span>
+                                            </li>
+                                        );
+                                    },
+                                }}
+                            >
+                                {post.generated_content}
+                            </ReactMarkdown>
+                        ) : (
+                            <div className="whitespace-pre-wrap leading-relaxed text-gray-800 text-lg">
+                                {post.content}
+                            </div>
+                        )}
                     </div>
                 </article>
 

@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(function () {
     // 記事管理
     Route::resource('posts', AdminPostController::class);
+    Route::post('posts/generate', [AdminPostController::class, 'generateArticle'])->name('posts.generate');
 
     // カテゴリ管理
     Route::resource('categories', AdminCategoryController::class)->except(['show']);
