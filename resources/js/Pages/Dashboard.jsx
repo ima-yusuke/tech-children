@@ -15,37 +15,43 @@ import {
     Sparkles
 } from 'lucide-react';
 
-export default function Dashboard() {
-    const stats = [
+export default function Dashboard({ stats }) {
+    // 数値をフォーマット
+    const formatNumber = (num) => {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        } else if (num >= 1000) {
+            return (num / 1000).toFixed(1) + 'K';
+        }
+        return num.toString();
+    };
+
+    const statsDisplay = [
         {
             label: '記事数',
-            value: '128',
-            change: '+12%',
-            trend: 'up',
+            value: formatNumber(stats.posts),
+            rawValue: stats.posts,
             icon: FileText,
             color: 'from-indigo-600 to-purple-600'
         },
         {
             label: '総閲覧数',
-            value: '24.5K',
-            change: '+18%',
-            trend: 'up',
+            value: formatNumber(stats.views),
+            rawValue: stats.views,
             icon: Eye,
             color: 'from-blue-600 to-cyan-600'
         },
         {
             label: 'いいね',
-            value: '3,247',
-            change: '+23%',
-            trend: 'up',
+            value: formatNumber(stats.reactions),
+            rawValue: stats.reactions,
             icon: Heart,
             color: 'from-rose-600 to-pink-600'
         },
         {
             label: 'コメント',
-            value: '892',
-            change: '+8%',
-            trend: 'up',
+            value: formatNumber(stats.comments),
+            rawValue: stats.comments,
             icon: MessageSquare,
             color: 'from-amber-600 to-orange-600'
         },
@@ -133,7 +139,7 @@ export default function Dashboard() {
 
                         {/* Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {stats.map((stat, index) => (
+                            {statsDisplay.map((stat, index) => (
                                 <div
                                     key={index}
                                     className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:border-gray-200 transition-all duration-300"
@@ -147,10 +153,6 @@ export default function Dashboard() {
                                             <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color} shadow-lg`}>
                                                 <stat.icon className="w-6 h-6 text-white" />
                                             </div>
-                                            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold">
-                                                <TrendingUp className="w-3 h-3" />
-                                                {stat.change}
-                                            </div>
                                         </div>
 
                                         <div>
@@ -159,6 +161,9 @@ export default function Dashboard() {
                                             </p>
                                             <p className="text-3xl font-bold text-gray-900">
                                                 {stat.value}
+                                            </p>
+                                            <p className="text-xs text-gray-500 mt-1">
+                                                合計: {stat.rawValue.toLocaleString()}
                                             </p>
                                         </div>
                                     </div>
