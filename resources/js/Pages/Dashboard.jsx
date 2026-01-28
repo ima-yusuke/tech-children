@@ -15,7 +15,7 @@ import {
     Sparkles
 } from 'lucide-react';
 
-export default function Dashboard({ stats }) {
+export default function Dashboard({ stats, recentActivities, growthRates }) {
     // 数値をフォーマット
     const formatNumber = (num) => {
         if (num >= 1000000) {
@@ -24,6 +24,26 @@ export default function Dashboard({ stats }) {
             return (num / 1000).toFixed(1) + 'K';
         }
         return num.toString();
+    };
+
+    // 相対時間をフォーマット
+    const formatRelativeTime = (dateString) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        const diffHours = Math.floor(diffMs / 3600000);
+        const diffDays = Math.floor(diffMs / 86400000);
+
+        if (diffMins < 60) {
+            return `${diffMins}分前`;
+        } else if (diffHours < 24) {
+            return `${diffHours}時間前`;
+        } else if (diffDays < 30) {
+            return `${diffDays}日前`;
+        } else {
+            return date.toLocaleDateString('ja-JP');
+        }
     };
 
     const statsDisplay = [
@@ -96,12 +116,6 @@ export default function Dashboard({ stats }) {
         },
     ];
 
-    const recentActivities = [
-        { type: 'post', title: '新しい記事を公開しました', time: '2時間前', color: 'text-indigo-600' },
-        { type: 'comment', title: 'コメントが承認されました', time: '4時間前', color: 'text-blue-600' },
-        { type: 'category', title: 'カテゴリを追加しました', time: '6時間前', color: 'text-emerald-600' },
-        { type: 'post', title: '記事を編集しました', time: '8時間前', color: 'text-purple-600' },
-    ];
 
     return (
         <AuthenticatedLayout
@@ -233,37 +247,43 @@ export default function Dashboard({ stats }) {
 
                                 <div className="rounded-2xl bg-white shadow-sm border border-gray-100 overflow-hidden">
                                     <div className="divide-y divide-gray-100">
-                                        {recentActivities.map((activity, index) => (
-                                            <div
-                                                key={index}
-                                                className="p-6 hover:bg-gray-50 transition-colors duration-200 group"
-                                            >
-                                                <div className="flex items-start gap-4">
-                                                    <div className={`p-2.5 rounded-xl bg-gradient-to-br ${
-                                                        activity.type === 'post' ? 'from-indigo-500/10 to-purple-500/10' :
-                                                        activity.type === 'comment' ? 'from-blue-500/10 to-cyan-500/10' :
-                                                        activity.type === 'category' ? 'from-emerald-500/10 to-teal-500/10' :
-                                                        'from-purple-500/10 to-pink-500/10'
-                                                    } group-hover:scale-110 transition-transform duration-300`}>
-                                                        <div className={`w-2 h-2 rounded-full ${
-                                                            activity.type === 'post' ? 'bg-indigo-600' :
-                                                            activity.type === 'comment' ? 'bg-blue-600' :
-                                                            activity.type === 'category' ? 'bg-emerald-600' :
-                                                            'bg-purple-600'
-                                                        }`}></div>
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <p className="text-sm font-medium text-gray-900 mb-1 group-hover:text-gray-700 transition-colors">
-                                                            {activity.title}
-                                                        </p>
-                                                        <p className="text-xs text-gray-500 flex items-center gap-1">
-                                                            <Clock className="w-3 h-3" />
-                                                            {activity.time}
-                                                        </p>
+                                        {recentActivities && recentActivities.length > 0 ? (
+                                            recentActivities.map((activity, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="p-6 hover:bg-gray-50 transition-colors duration-200 group"
+                                                >
+                                                    <div className="flex items-start gap-4">
+                                                        <div className={`p-2.5 rounded-xl bg-gradient-to-br ${
+                                                            activity.type === 'post' ? 'from-indigo-500/10 to-purple-500/10' :
+                                                            activity.type === 'comment' ? 'from-blue-500/10 to-cyan-500/10' :
+                                                            activity.type === 'category' ? 'from-emerald-500/10 to-teal-500/10' :
+                                                            'from-purple-500/10 to-pink-500/10'
+                                                        } group-hover:scale-110 transition-transform duration-300`}>
+                                                            <div className={`w-2 h-2 rounded-full ${
+                                                                activity.type === 'post' ? 'bg-indigo-600' :
+                                                                activity.type === 'comment' ? 'bg-blue-600' :
+                                                                activity.type === 'category' ? 'bg-emerald-600' :
+                                                                'bg-purple-600'
+                                                            }`}></div>
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-medium text-gray-900 mb-1 group-hover:text-gray-700 transition-colors">
+                                                                {activity.title}
+                                                            </p>
+                                                            <p className="text-xs text-gray-500 flex items-center gap-1">
+                                                                <Clock className="w-3 h-3" />
+                                                                {formatRelativeTime(activity.time)}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                            ))
+                                        ) : (
+                                            <div className="p-6 text-center text-gray-500">
+                                                まだアクティビティがありません
                                             </div>
-                                        ))}
+                                        )}
                                     </div>
                                 </div>
 
@@ -286,28 +306,28 @@ export default function Dashboard({ stats }) {
                                             <div>
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-white/80">記事投稿</span>
-                                                    <span className="text-sm font-bold text-white">89%</span>
+                                                    <span className="text-sm font-bold text-white">{growthRates?.posts || 0}%</span>
                                                 </div>
                                                 <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full" style={{ width: '89%' }}></div>
+                                                    <div className="h-full bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full" style={{ width: `${growthRates?.posts || 0}%` }}></div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-white/80">エンゲージメント</span>
-                                                    <span className="text-sm font-bold text-white">76%</span>
+                                                    <span className="text-sm font-bold text-white">{growthRates?.engagement || 0}%</span>
                                                 </div>
                                                 <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full" style={{ width: '76%' }}></div>
+                                                    <div className="h-full bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full" style={{ width: `${growthRates?.engagement || 0}%` }}></div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-white/80">読者数</span>
-                                                    <span className="text-sm font-bold text-white">92%</span>
+                                                    <span className="text-sm font-bold text-white">{growthRates?.views || 0}%</span>
                                                 </div>
                                                 <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" style={{ width: '92%' }}></div>
+                                                    <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full" style={{ width: `${growthRates?.views || 0}%` }}></div>
                                                 </div>
                                             </div>
                                         </div>
