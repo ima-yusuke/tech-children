@@ -1,2 +1,17 @@
+# robots.txt - 検索エンジンクローラーへの指示書
+# このファイルは検索エンジンに「どのページを見ていいか」を教えます
+
+# すべての検索エンジンに対する設定
 User-agent: *
-Disallow:
+
+# 検索結果に表示させたくないページ（管理画面など）
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /profile
+
+# サイトマップの場所を教える
+# クローラーは、ここからすべてのページ情報を効率的に取得できます
+Sitemap: https://tech-children.com/sitemap.xml
+
+# ローカル開発環境用（本番環境では上記URLに変更してください）
+# Sitemap: http://localhost/sitemap.xml

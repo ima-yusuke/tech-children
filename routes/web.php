@@ -7,6 +7,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TopPageController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -17,6 +18,9 @@ use Inertia\Inertia;
 
 // フロントエンドルート（公開）
 Route::get('/', [TopPageController::class, 'index'])->name('home');
+
+// サイトマップ（検索エンジン用）
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // 記事
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
