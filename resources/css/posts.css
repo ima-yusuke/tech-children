@@ -1,0 +1,453 @@
+/* Posts Index Page - 洗練された落ち着いたデザイン */
+
+/* ========================================
+   Base Styles (TOP page と共通)
+======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    line-height: 1.8;
+    color: #333;
+    background-color: #fafafa;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ========================================
+   Header
+======================================== */
+.site-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-logo {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.site-logo a {
+    color: #1a1a1a;
+}
+
+.main-nav {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+}
+
+.nav-link.active {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #1a1a1a;
+}
+
+/* ========================================
+   Page Header
+======================================== */
+.page-header {
+    background-color: #fff;
+    padding: 80px 0;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+.page-description {
+    font-size: 16px;
+    color: #666;
+}
+
+/* ========================================
+   Content Layout
+======================================== */
+.content-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    padding: 64px 0;
+}
+
+/* ========================================
+   Main Content
+======================================== */
+.main-content {
+    min-width: 0;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+}
+
+.post-card {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.post-card:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+}
+
+.post-link {
+    display: block;
+    padding: 28px;
+}
+
+.post-category {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.post-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.post-excerpt {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 12px;
+}
+
+.post-views {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.post-tag {
+    font-size: 12px;
+    color: #999;
+}
+
+/* ========================================
+   Pagination
+======================================== */
+.pagination-wrapper {
+    margin-top: 56px;
+    padding-top: 56px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.pagination-link {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.pagination-link:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+    opacity: 1;
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #999;
+}
+
+/* ========================================
+   Empty State
+======================================== */
+.empty-state {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.empty-message {
+    font-size: 16px;
+    color: #999;
+}
+
+/* ========================================
+   Sidebar
+======================================== */
+.sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.sidebar-section {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.sidebar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Category List */
+.category-list {
+    list-style: none;
+}
+
+.category-item {
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 14px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.category-link:hover {
+    color: #1a1a1a;
+    opacity: 1;
+}
+
+.category-name {
+    font-weight: 500;
+}
+
+.category-count {
+    font-size: 13px;
+    color: #999;
+}
+
+/* Tag Cloud */
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-item {
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #666;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.tag-item:hover {
+    background-color: #e5e5e5;
+    color: #1a1a1a;
+    opacity: 1;
+}
+
+/* ========================================
+   Footer
+======================================== */
+.site-footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 64px 0 32px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    margin-bottom: 48px;
+}
+
+.footer-logo {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+.footer-description {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #999;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 64px;
+}
+
+.footer-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-nav-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.footer-link {
+    font-size: 14px;
+    color: #999;
+}
+
+.footer-link:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ========================================
+   Responsive
+======================================== */
+@media (max-width: 1024px) {
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 56px 0;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .content-layout {
+        padding: 40px 0;
+    }
+
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .main-nav {
+        gap: 20px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-nav {
+        gap: 40px;
+    }
+}

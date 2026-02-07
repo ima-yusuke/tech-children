@@ -84,4 +84,14 @@ class Post extends Model
     {
         return $this->hasMany(Bookmark::class);
     }
+
+    /**
+     * 公開済みの記事のみ取得するスコープ
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published')
+                    ->whereNotNull('published_at')
+                    ->where('published_at', '<=', now());
+    }
 }

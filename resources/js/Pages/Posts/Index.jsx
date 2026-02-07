@@ -1,274 +1,182 @@
-import FrontLayout from '@/Layouts/FrontLayout';
-import SEO from '@/Components/SEO';
 import { Link } from '@inertiajs/react';
+import SEO from '@/Components/SEO';
+import '../../../css/posts.css';
 
 export default function Index({ posts, categories, popularTags }) {
     return (
-        <FrontLayout>
+        <>
             <SEO
-                title="技術用語解説 - 初学者向けプログラミング学習"
-                description="エンジニア初学者のための技術用語解説サイト。Git、Docker、Laravel、Reactなどの技術を分かりやすく解説。ChatGPTで学んだ内容も共有しています。"
-                keywords="技術用語,プログラミング,初心者,エンジニア,Git,Docker,Laravel,React,JavaScript,PHP"
+                title="記事一覧 - Tech Children"
+                description="プログラミング初学者向けの技術用語解説記事の一覧ページ。わかりやすく丁寧に解説した記事で学習をサポートします。"
+                keywords="プログラミング,技術用語,初心者,学習,記事一覧"
             />
 
-            {/* ヒーローセクション */}
-            <div className="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-24 text-white overflow-hidden">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHptMCAyNGMwIDIuMjEtMS43OSA0LTQgNHMtNC0xLjc5LTQtNCAxLjc5LTQgNC00IDQgMS43OSA0IDR6bTAtMTJjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0xMiAxMmMwIDIuMjEtMS43OSA0LTQgNHMtNC0xLjc5LTQtNCAxLjc5LTQgNC00IDQgMS43OSA0IDR6bTAtMTJjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0wLTEyYzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHptMTIgMjRjMCAyLjIxLTEuNzkgNC00IDRzLTQtMS43OS00LTQgMS43OS00IDQtNCA0IDEuNzkgNCA0em0wLTEyYzAgMi4yMS0xLjc5IDQtNCA0cy00LTEuNzktNC00IDEuNzktNCA0LTQgNCAxLjc5IDQgNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
-
-                <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-                            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                            <span className="text-sm font-medium">学びを加速させる技術解説</span>
-                        </div>
-
-                        <h1 className="mb-6 text-5xl font-black tracking-tight sm:text-6xl md:text-7xl drop-shadow-lg">
-                            Tech Children
+            {/* Header */}
+            <header className="site-header">
+                <div className="container">
+                    <div className="header-content">
+                        <h1 className="site-logo">
+                            <a href="/" onClick={(e) => { e.preventDefault(); window.location.href = '/'; }}>Tech Children</a>
                         </h1>
-                        <p className="mb-4 text-xl text-white/90 sm:text-2xl font-medium max-w-3xl mx-auto">
-                            エンジニア初学者のための技術用語解説サイト
-                        </p>
-                        <p className="mb-10 text-base text-white/70 max-w-2xl mx-auto">
-                            Git、Docker、Laravel、Reactなど、現場で使える技術を分かりやすく解説
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <Link
-                                href={route('search')}
-                                className="group inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 font-bold text-indigo-600 shadow-2xl transition-all hover:bg-gray-50 hover:shadow-xl hover:scale-105"
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                                記事を検索
-                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </Link>
-                            <div className="flex items-center gap-6 text-sm text-white/80">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
-                                    </div>
-                                    <span className="font-medium">100+ 記事</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                        </svg>
-                                    </div>
-                                    <span className="font-medium">初心者向け</span>
-                                </div>
-                            </div>
-                        </div>
+                        <nav className="main-nav">
+                            <a href="/" onClick={(e) => { e.preventDefault(); window.location.href = '/'; }} className="nav-link">ホーム</a>
+                            <Link href={route('posts.index')} className="nav-link active">記事一覧</Link>
+                            <Link href={route('search')} className="nav-link">検索</Link>
+                        </nav>
                     </div>
                 </div>
-            </div>
+            </header>
 
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-                    {/* メインコンテンツ */}
-                    <div className="lg:col-span-3">
-                        <div className="mb-8 flex items-center justify-between">
-                            <div>
-                                <h2 className="text-3xl font-bold text-gray-900 mb-2">最新の記事</h2>
-                                <p className="text-gray-600">学びを深める技術解説コンテンツ</p>
-                            </div>
-                        </div>
+            {/* Page Header */}
+            <section className="page-header">
+                <div className="container">
+                    <h1 className="page-title">記事一覧</h1>
+                    <p className="page-description">プログラミング初学者向けの技術用語解説記事</p>
+                </div>
+            </section>
 
-                        <div className="space-y-6">
-                            {posts.data.map((post) => (
-                                <article
-                                    key={post.id}
-                                    className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all hover:shadow-2xl hover:border-gray-200 hover:-translate-y-1"
-                                >
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-full -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="container">
+                <div className="content-layout">
+                    {/* Main Content */}
+                    <main className="main-content">
+                        {posts.data && posts.data.length > 0 ? (
+                            <>
+                                <div className="posts-grid">
+                                    {posts.data.map((post) => (
+                                        <article key={post.id} className="post-card">
+                                            <Link href={route('posts.show', post.slug)} className="post-link">
+                                                {post.category && (
+                                                    <span className="post-category">{post.category.name}</span>
+                                                )}
+                                                <h2 className="post-title">{post.title}</h2>
+                                                {post.excerpt && (
+                                                    <p className="post-excerpt">
+                                                        {post.excerpt.length > 100
+                                                            ? post.excerpt.substring(0, 100) + '...'
+                                                            : post.excerpt}
+                                                    </p>
+                                                )}
+                                                <div className="post-meta">
+                                                    <time dateTime={post.published_at}>
+                                                        {new Date(post.published_at).toLocaleDateString('ja-JP', {
+                                                            year: 'numeric',
+                                                            month: 'long',
+                                                            day: 'numeric',
+                                                        })}
+                                                    </time>
+                                                    <span className="post-views">
+                                                        {post.view_count?.toLocaleString()} views
+                                                    </span>
+                                                </div>
+                                                {post.tags && post.tags.length > 0 && (
+                                                    <div className="post-tags">
+                                                        {post.tags.map((tag) => (
+                                                            <span key={tag.id} className="post-tag">
+                                                                #{tag.name}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </Link>
+                                        </article>
+                                    ))}
+                                </div>
 
-                                    <div className="relative p-8">
-                                        <div className="mb-4 flex items-center gap-3 text-sm">
-                                            {post.category && (
-                                                <Link
-                                                    href={route('categories.show', post.category.slug)}
-                                                    className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-3 py-1.5 text-xs font-bold text-white shadow-md transition-all hover:shadow-lg hover:scale-105"
-                                                >
-                                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                                    </svg>
-                                                    {post.category.name}
+                                {/* Pagination */}
+                                {(posts.prev_page_url || posts.next_page_url) && (
+                                    <div className="pagination-wrapper">
+                                        <div className="pagination">
+                                            {posts.prev_page_url && (
+                                                <Link href={posts.prev_page_url} className="pagination-link">
+                                                    前のページ
                                                 </Link>
                                             )}
-                                            <span className="text-gray-300">·</span>
-                                            <time className="text-gray-500 font-medium flex items-center gap-1.5">
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                                {new Date(post.published_at).toLocaleDateString('ja-JP', {
-                                                    year: 'numeric',
-                                                    month: 'long',
-                                                    day: 'numeric',
-                                                })}
-                                            </time>
-                                        </div>
-
-                                        <h3 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-indigo-600">
-                                            <Link href={route('posts.show', post.slug)} className="flex items-start gap-2">
-                                                <span className="flex-1">{post.title}</span>
-                                                <svg className="w-5 h-5 text-gray-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                                </svg>
-                                            </Link>
-                                        </h3>
-
-                                        {post.excerpt && (
-                                            <p className="mb-5 line-clamp-2 text-gray-600 leading-relaxed">
-                                                {post.excerpt}
-                                            </p>
-                                        )}
-
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            {post.tags.slice(0, 3).map((tag) => (
-                                                <Link
-                                                    key={tag.id}
-                                                    href={route('tags.show', tag.slug)}
-                                                    className="inline-flex items-center gap-1 rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-700 border border-gray-200 transition-all hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200"
-                                                >
-                                                    <span className="text-gray-400">#</span>
-                                                    {tag.name}
+                                            <span className="pagination-info">
+                                                {posts.current_page} / {posts.last_page}
+                                            </span>
+                                            {posts.next_page_url && (
+                                                <Link href={posts.next_page_url} className="pagination-link">
+                                                    次のページ
                                                 </Link>
-                                            ))}
-                                            {post.tags.length > 3 && (
-                                                <span className="inline-flex items-center px-2 py-1 rounded-lg bg-gray-100 text-xs font-medium text-gray-500">
-                                                    +{post.tags.length - 3} more
-                                                </span>
                                             )}
                                         </div>
                                     </div>
-
-                                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent group-hover:via-indigo-300 transition-all"></div>
-                                </article>
-                            ))}
-                        </div>
-
-                        {posts.data.length === 0 && (
-                            <div className="rounded-2xl bg-white p-20 text-center shadow-sm border border-gray-100">
-                                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                    <svg
-                                        className="w-10 h-10 text-gray-400"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                        />
-                                    </svg>
-                                </div>
-                                <h3 className="text-lg font-bold text-gray-900 mb-2">記事がまだありません</h3>
-                                <p className="text-gray-500">新しい記事をお楽しみに</p>
+                                )}
+                            </>
+                        ) : (
+                            <div className="empty-state">
+                                <p className="empty-message">記事が見つかりませんでした</p>
                             </div>
                         )}
-                    </div>
+                    </main>
 
-                    {/* サイドバー */}
-                    <aside className="lg:col-span-1">
-                        <div className="space-y-6 lg:sticky lg:top-24">
-                            {/* カテゴリ */}
-                            <div className="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100">
-                                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-5 relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
-                                    <h3 className="font-bold text-white flex items-center gap-2 relative">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                        </svg>
-                                        カテゴリ
-                                    </h3>
-                                </div>
-                                <ul className="divide-y divide-gray-50 p-2">
+                    {/* Sidebar */}
+                    <aside className="sidebar">
+                        {/* Categories */}
+                        {categories && categories.length > 0 && (
+                            <div className="sidebar-section">
+                                <h3 className="sidebar-title">カテゴリ</h3>
+                                <ul className="category-list">
                                     {categories.map((category) => (
-                                        <li key={category.id}>
+                                        <li key={category.id} className="category-item">
                                             <Link
                                                 href={route('categories.show', category.slug)}
-                                                className="group flex items-center justify-between px-4 py-3 rounded-xl text-gray-700 transition-all hover:bg-indigo-50 hover:text-indigo-600"
+                                                className="category-link"
                                             >
-                                                <span className="font-semibold flex items-center gap-2">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                                    {category.name}
-                                                </span>
-                                                <span className="px-2.5 py-1 rounded-lg bg-gray-100 group-hover:bg-indigo-100 text-xs font-bold text-gray-700 group-hover:text-indigo-700 transition-colors">
-                                                    {category.posts_count}
-                                                </span>
+                                                <span className="category-name">{category.name}</span>
+                                                <span className="category-count">{category.posts_count}</span>
                                             </Link>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
+                        )}
 
-                            {/* 人気のタグ */}
-                            <div className="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100">
-                                <div className="bg-gradient-to-r from-pink-600 to-purple-600 px-6 py-5 relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -mr-10 -mt-10"></div>
-                                    <h3 className="font-bold text-white flex items-center gap-2 relative">
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
-                                        </svg>
-                                        人気のタグ
-                                    </h3>
-                                </div>
-                                <div className="flex flex-wrap gap-2 p-5">
+                        {/* Popular Tags */}
+                        {popularTags && popularTags.length > 0 && (
+                            <div className="sidebar-section">
+                                <h3 className="sidebar-title">人気のタグ</h3>
+                                <div className="tag-cloud">
                                     {popularTags.map((tag) => (
                                         <Link
                                             key={tag.id}
                                             href={route('tags.show', tag.slug)}
-                                            className="group inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 px-3 py-2 text-sm font-bold text-purple-800 transition-all hover:from-purple-100 hover:to-pink-100 hover:shadow-md hover:scale-105 hover:border-purple-200"
+                                            className="tag-item"
                                         >
-                                            <span className="text-purple-400 group-hover:text-purple-600 transition-colors">#</span>
-                                            {tag.name}
-                                            <span className="ml-0.5 px-1.5 py-0.5 rounded-md bg-white/60 text-xs font-bold text-purple-700">
-                                                {tag.posts_count}
-                                            </span>
+                                            #{tag.name}
                                         </Link>
                                     ))}
                                 </div>
                             </div>
-
-                            {/* プロモーションカード */}
-                            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 p-8 shadow-xl">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-600/20 rounded-full -mr-16 -mt-16"></div>
-                                <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-600/20 rounded-full -ml-12 -mb-12"></div>
-
-                                <div className="relative">
-                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center mb-4 shadow-lg">
-                                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                        </svg>
-                                    </div>
-                                    <h4 className="text-lg font-bold text-white mb-2">
-                                        さらに学ぶ
-                                    </h4>
-                                    <p className="text-sm text-gray-400 mb-4 leading-relaxed">
-                                        最新の技術トレンドと実践的な解説をチェック
-                                    </p>
-                                    <Link
-                                        href={route('search')}
-                                        className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-indigo-300 transition-colors group"
-                                    >
-                                        すべての記事を見る
-                                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                        </svg>
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                        )}
                     </aside>
                 </div>
             </div>
-        </FrontLayout>
+
+            {/* Footer */}
+            <footer className="site-footer">
+                <div className="container">
+                    <div className="footer-content">
+                        <div className="footer-brand">
+                            <h3 className="footer-logo">Tech Children</h3>
+                            <p className="footer-description">
+                                プログラミング初学者のための<br />技術用語辞典サイト
+                            </p>
+                        </div>
+                        <nav className="footer-nav">
+                            <div className="footer-nav-group">
+                                <h4 className="footer-nav-title">コンテンツ</h4>
+                                <a href="/" onClick={(e) => { e.preventDefault(); window.location.href = '/'; }} className="footer-link">ホーム</a>
+                                <Link href={route('posts.index')} className="footer-link">記事一覧</Link>
+                                <Link href={route('search')} className="footer-link">検索</Link>
+                            </div>
+                        </nav>
+                    </div>
+                    <div className="footer-bottom">
+                        <p className="copyright">&copy; {new Date().getFullYear()} Tech Children. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </>
     );
 }

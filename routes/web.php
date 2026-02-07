@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TopPageController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // フロントエンドルート（公開）
-Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/', [TopPageController::class, 'index'])->name('home');
 
 // 記事
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
