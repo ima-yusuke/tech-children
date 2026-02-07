@@ -96,7 +96,7 @@ export default function Show({ post, comments, relatedPosts }) {
             <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
                 {/* 記事本文 */}
                 <article className="mb-12 overflow-hidden rounded-3xl bg-white shadow-xl border border-gray-100">
-                    <div className="prose prose-lg max-w-none p-8 sm:p-12 lg:p-16">
+                    <div className="prose prose-lg max-w-none p-8 sm:p-12 lg:p-16" style={{ lineHeight: '1.8' }}>
                         {post.generated_content ? (
                             <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
@@ -104,7 +104,7 @@ export default function Show({ post, comments, relatedPosts }) {
                                 components={{
                                     code({ node, inline, className, children, ...props }) {
                                         return inline ? (
-                                            <code className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-sm font-mono border border-red-100" {...props}>
+                                            <code className="bg-gray-100 text-gray-800 px-2 py-0.5 rounded text-sm font-mono" {...props}>
                                                 {children}
                                             </code>
                                         ) : (
@@ -114,50 +114,47 @@ export default function Show({ post, comments, relatedPosts }) {
                                         );
                                     },
                                     strong({ children }) {
-                                        return <strong className="font-bold text-gray-900 bg-yellow-100 px-1">{children}</strong>;
+                                        return <strong className="font-bold text-gray-900">{children}</strong>;
                                     },
                                     blockquote({ children }) {
                                         return (
-                                            <blockquote className="border-l-4 border-blue-400 bg-blue-50 pl-6 py-4 my-6 rounded-r-lg">
+                                            <blockquote className="border-l-4 border-gray-300 pl-6 py-1 my-8 text-gray-700">
                                                 {children}
                                             </blockquote>
                                         );
                                     },
                                     pre({ children }) {
                                         return (
-                                            <pre className="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto shadow-lg my-6">
+                                            <pre className="bg-gray-900 text-gray-100 p-6 rounded-lg overflow-x-auto my-8">
                                                 {children}
                                             </pre>
                                         );
                                     },
                                     h2({ children }) {
                                         return (
-                                            <h2 className="text-3xl font-bold mt-12 mb-6 pb-3 border-b-4 border-indigo-200 text-gray-900">
+                                            <h2 className="text-2xl font-bold mt-12 mb-6 text-gray-900" style={{ fontSize: '2.25rem', lineHeight: '1.3' }}>
                                                 {children}
                                             </h2>
                                         );
                                     },
                                     h3({ children }) {
                                         return (
-                                            <h3 className="text-2xl font-bold mt-10 mb-4 text-gray-900 flex items-center gap-3">
-                                                <span className="w-2 h-8 bg-gradient-to-b from-indigo-600 to-purple-600 rounded-full"></span>
+                                            <h3 className="text-xl font-bold mt-10 mb-4 text-gray-900" style={{ fontSize: '1.5rem', lineHeight: '1.4' }}>
                                                 {children}
                                             </h3>
                                         );
                                     },
+                                    p({ children }) {
+                                        return <p className="my-6 text-gray-800 leading-relaxed">{children}</p>;
+                                    },
                                     ul({ children }) {
-                                        return <ul className="space-y-3 my-6">{children}</ul>;
+                                        return <ul className="space-y-2 my-6 pl-6">{children}</ul>;
                                     },
                                     ol({ children }) {
-                                        return <ol className="space-y-3 my-6">{children}</ol>;
+                                        return <ol className="space-y-2 my-6 pl-6">{children}</ol>;
                                     },
                                     li({ children }) {
-                                        return (
-                                            <li className="flex items-start gap-3">
-                                                <span className="mt-2 w-2 h-2 rounded-full bg-indigo-600 flex-shrink-0"></span>
-                                                <span className="flex-1">{children}</span>
-                                            </li>
-                                        );
+                                        return <li className="text-gray-800 leading-relaxed">{children}</li>;
                                     },
                                 }}
                             >
