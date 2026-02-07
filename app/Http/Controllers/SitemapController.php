@@ -79,23 +79,29 @@ class SitemapController extends Controller
         // カテゴリーページ
         // priority: 0.7 = 一覧ページとして中程度の重要性
         foreach ($categories as $category) {
-            $xml .= '<url>';
-            $xml .= '<loc>' . route('categories.show', $category->slug) . '</loc>';
-            $xml .= '<lastmod>' . $category->updated_at->toAtomString() . '</lastmod>';
-            $xml .= '<changefreq>weekly</changefreq>';
-            $xml .= '<priority>0.7</priority>';
-            $xml .= '</url>';
+            // slugが存在する場合のみサイトマップに含める
+            if ($category->slug) {
+                $xml .= '<url>';
+                $xml .= '<loc>' . route('categories.show', $category->slug) . '</loc>';
+                $xml .= '<lastmod>' . $category->updated_at->toAtomString() . '</lastmod>';
+                $xml .= '<changefreq>weekly</changefreq>';
+                $xml .= '<priority>0.7</priority>';
+                $xml .= '</url>';
+            }
         }
 
         // タグページ
         // priority: 0.6 = 補助的なページとしてやや低めの重要性
         foreach ($tags as $tag) {
-            $xml .= '<url>';
-            $xml .= '<loc>' . route('tags.show', $tag->slug) . '</loc>';
-            $xml .= '<lastmod>' . $tag->updated_at->toAtomString() . '</lastmod>';
-            $xml .= '<changefreq>weekly</changefreq>';
-            $xml .= '<priority>0.6</priority>';
-            $xml .= '</url>';
+            // slugが存在する場合のみサイトマップに含める
+            if ($tag->slug) {
+                $xml .= '<url>';
+                $xml .= '<loc>' . route('tags.show', $tag->slug) . '</loc>';
+                $xml .= '<lastmod>' . $tag->updated_at->toAtomString() . '</lastmod>';
+                $xml .= '<changefreq>weekly</changefreq>';
+                $xml .= '<priority>0.6</priority>';
+                $xml .= '</url>';
+            }
         }
 
         $xml .= '</urlset>';
