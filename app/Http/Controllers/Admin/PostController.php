@@ -17,15 +17,23 @@ class PostController extends Controller
     /**
      * 記事一覧の表示
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user', 'category', 'tags'])
-            ->withCount('comments')
-            ->latest()
-            ->paginate(15);
+        $query = Post::with(['user', 'category', 'tags'])
+            ->withCount('comments');
+
+        // ステータスでフィルター
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $posts = $query->latest()->paginate(15)->withQueryString();
 
         return Inertia::render('Admin/Posts/Index', [
             'posts' => $posts,
+            'filters' => [
+                'status' => $request->status,
+            ],
         ]);
     }
 

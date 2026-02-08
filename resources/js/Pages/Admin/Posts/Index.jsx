@@ -1,7 +1,21 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
+import { useState } from 'react';
 
-export default function Index({ posts }) {
+export default function Index({ posts, filters }) {
+    const [statusFilter, setStatusFilter] = useState(filters.status || '');
+
+    const handleFilterChange = (e) => {
+        const value = e.target.value;
+        setStatusFilter(value);
+
+        // フィルター適用
+        router.get(route('admin.posts.index'),
+            value ? { status: value } : {},
+            { preserveState: true }
+        );
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -24,6 +38,28 @@ export default function Index({ posts }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6">
+                            {/* フィルターUI */}
+                            <div className="mb-6 flex items-center gap-4">
+                                <label htmlFor="status-filter" className="text-sm font-medium text-gray-700">
+                                    ステータスで絞り込み:
+                                </label>
+                                <select
+                                    id="status-filter"
+                                    value={statusFilter}
+                                    onChange={handleFilterChange}
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                >
+                                    <option value="">すべて</option>
+                                    <option value="published">公開</option>
+                                    <option value="draft">下書き</option>
+                                    <option value="private">限定公開</option>
+                                </select>
+                                {statusFilter && (
+                                    <span className="text-sm text-gray-500">
+                                        ({posts.total}件)
+                                    </span>
+                                )}
+                            </div>
                             <div className="overflow-x-auto">
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
