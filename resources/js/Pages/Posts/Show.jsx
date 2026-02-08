@@ -27,6 +27,34 @@ export default function Show({ post, comments, relatedPosts }) {
         });
     };
 
+    // 構造化データ（JSON-LD）の生成
+    // 【役割】Googleなどの検索エンジンが記事の内容を理解しやすくする
+    // 【効果】検索結果に著者名・公開日・評価などが表示される（リッチスニペット）
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": post.excerpt || post.content.substring(0, 160),
+        "datePublished": post.published_at,
+        "dateModified": post.updated_at,
+        "author": {
+            "@type": "Organization",
+            "name": "Tech Children"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Tech Children",
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${window.location.origin}/images/logo.png`
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": window.location.href
+        }
+    };
+
     return (
         <>
             <SEO
@@ -34,6 +62,13 @@ export default function Show({ post, comments, relatedPosts }) {
                 description={post.excerpt || post.content.substring(0, 160)}
                 keywords={`${post.tags.map(tag => tag.name).join(',')},技術用語,プログラミング,初心者`}
                 ogType="article"
+            />
+
+            {/* 構造化データをHTMLに埋め込む */}
+            {/* dangerouslySetInnerHTML: Reactで生のHTMLを埋め込むための特殊な属性 */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
 
             {/* Header */}
