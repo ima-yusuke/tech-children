@@ -417,4 +417,238 @@ a:hover {
     .posts-section {
         padding: 56px 0;
     }
+
+    .faq-question {
+        font-size: 16px;
+        padding: 20px 24px;
+    }
+
+    .faq-answer {
+        padding: 0 24px 20px 24px;
+        font-size: 14px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 48px;
+    }
+
+    .stat-number {
+        font-size: 32px;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .testimonials-section {
+        margin-bottom: 48px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .social-btn {
+        width: 100%;
+    }
+
+    .subsection-title {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+}
+
+/* ========================================
+   FAQ Section
+======================================== */
+.faq-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: #999;
+}
+
+.faq-item[open] {
+    border-color: #1a1a1a;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::marker {
+    display: none;
+}
+
+.faq-icon {
+    font-size: 24px;
+    font-weight: 300;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 28px 24px 28px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+/* ========================================
+   Community Section
+======================================== */
+.community-section {
+    padding: 80px 0;
+    background-color: #fafafa;
+}
+
+.subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #1a1a1a;
+    letter-spacing: 0.05em;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 64px;
+}
+
+.stat-card {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-size: 40px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Testimonials */
+.testimonials-section {
+    margin-bottom: 64px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    padding: 32px 28px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.testimonial-card:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+}
+
+.testimonial-quote {
+    font-size: 48px;
+    font-weight: 700;
+    color: #e5e5e5;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.testimonial-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 16px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-size: 13px;
+    color: #999;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Social Links */
+.social-section {
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    min-width: 140px;
 }

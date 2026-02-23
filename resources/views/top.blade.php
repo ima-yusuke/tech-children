@@ -168,6 +168,129 @@
     </section>
     @endif
 
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>Tech Childrenとは？</span>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>Tech Childrenは、プログラミング初学者のための技術用語辞典サイトです。難しい技術用語をわかりやすく丁寧に解説し、基礎から学べる記事を提供しています。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>どのような記事がありますか？</span>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>プログラミングの基礎概念、開発ツール、Web技術、データベースなど、幅広いカテゴリの技術用語を解説しています。各記事は初学者でも理解できるよう、丁寧な説明と具体例を含めています。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>会員登録は必要ですか？</span>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>いいえ、すべての記事は会員登録なしで無料で閲覧できます。どなたでも自由に学習していただけます。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>記事はどのくらいの頻度で更新されますか？</span>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>定期的に新しい記事を追加しており、既存の記事も技術の進化に合わせて更新しています。最新情報は「最新の記事」セクションでご確認ください。</p>
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>おすすめの学習方法は？</span>
+                        <span class="faq-icon">+</span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>興味のあるカテゴリから始めることをおすすめします。各記事は独立して読めるよう構成されていますが、関連記事へのリンクも用意しているため、体系的に学習を進めることもできます。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community-section">
+        <div class="container">
+            <h2 class="section-title">Tech Childrenコミュニティ</h2>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">{{ number_format($totalPosts) }}</div>
+                    <div class="stat-label">記事数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ number_format($totalCategories) }}</div>
+                    <div class="stat-label">カテゴリ数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">{{ number_format($totalViews) }}</div>
+                    <div class="stat-label">総閲覧数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1,000+</div>
+                    <div class="stat-label">学習者数</div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="testimonials-section">
+                <h3 class="subsection-title">利用者の声</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">プログラミング用語が難しかったのですが、このサイトのおかげで理解できるようになりました！</p>
+                        <p class="testimonial-author">- 初学者Aさん</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">わかりやすい説明で、独学でも挫折せずに学べています。</p>
+                        <p class="testimonial-author">- 学生Bさん</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">記事の質が高く、実務でも役立っています。</p>
+                        <p class="testimonial-author">- エンジニアCさん</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-section">
+                <h3 class="subsection-title">SNSでフォロー</h3>
+                <div class="social-links">
+                    <a href="https://twitter.com/techchildren" class="btn btn-outline social-btn" target="_blank" rel="noopener noreferrer">
+                        Twitter / X
+                    </a>
+                    <a href="https://github.com/techchildren" class="btn btn-outline social-btn" target="_blank" rel="noopener noreferrer">
+                        GitHub
+                    </a>
+                    <a href="{{ url('/feed') }}" class="btn btn-outline social-btn">
+                        RSS
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="top-footer">
         <div class="container">

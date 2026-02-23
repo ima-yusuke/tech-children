@@ -29,6 +29,11 @@ class TopPageController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('top', compact('recentPosts', 'popularPosts', 'categories'));
+        // 統計データを取得
+        $totalPosts = Post::published()->count();
+        $totalViews = Post::published()->sum('view_count');
+        $totalCategories = $categories->count();
+
+        return view('top', compact('recentPosts', 'popularPosts', 'categories', 'totalPosts', 'totalViews', 'totalCategories'));
     }
 }
