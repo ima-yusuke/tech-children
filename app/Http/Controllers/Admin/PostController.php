@@ -122,7 +122,6 @@ class PostController extends Controller
             ->published() // 公開済みのみ（published_atも考慮）
             ->orderBy('category_id')
             ->orderBy('updated_at', 'desc')
-            ->limit(100) // パフォーマンス対策
             ->get(['id', 'title', 'slug', 'category_id', 'updated_at']);
 
         // カテゴリごとにグループ化
