@@ -172,6 +172,20 @@ a:hover {
     color: #333;
 }
 
+.article-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 99, 235, 0.3);
+    text-underline-offset: 2px;
+    transition: all 0.3s ease;
+}
+
+.article-content a:hover {
+    color: #1d4ed8;
+    text-decoration-color: rgba(37, 99, 235, 0.6);
+    opacity: 1;
+}
+
 /* Markdown Styles - Noteテイスト */
 .markdown-body {
     /* 段落 */
@@ -203,6 +217,21 @@ a:hover {
     .font-bold {
         font-weight: 700;
         color: #1a1a1a;
+    }
+
+    /* リンク */
+    a {
+        color: #2563eb;
+        text-decoration: underline;
+        text-decoration-color: rgba(37, 99, 235, 0.3);
+        text-underline-offset: 2px;
+        transition: all 0.3s ease;
+    }
+
+    a:hover {
+        color: #1d4ed8;
+        text-decoration-color: rgba(37, 99, 235, 0.6);
+        opacity: 1;
     }
 
     /* インラインコード */
@@ -262,6 +291,20 @@ a:hover {
 .raw-content {
     white-space: pre-wrap;
     line-height: 1.9;
+}
+
+.raw-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 99, 235, 0.3);
+    text-underline-offset: 2px;
+    transition: all 0.3s ease;
+}
+
+.raw-content a:hover {
+    color: #1d4ed8;
+    text-decoration-color: rgba(37, 99, 235, 0.6);
+    opacity: 1;
 }
 
 /* ========================================
