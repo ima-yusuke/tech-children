@@ -7,8 +7,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import DangerButton from '@/Components/DangerButton';
 import { useState } from 'react';
 import axios from 'axios';
+import PostLinkModal from '@/Components/PostLinkModal';
 
-export default function Edit({ post, categories, tags }) {
+export default function Edit({ post, categories, tags, allPosts }) {
     const { data, setData, put, processing, errors } = useForm({
         title: post.title || '',
         slug: post.slug || '',
@@ -25,6 +26,7 @@ export default function Edit({ post, categories, tags }) {
 
     const [generating, setGenerating] = useState(false);
     const [generateError, setGenerateError] = useState('');
+    const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -69,8 +71,34 @@ export default function Edit({ post, categories, tags }) {
         }
     };
 
+    const handleInsertLink = (selectedPost) => {
+        const textarea = document.getElementById('content');
+        if (!textarea) {
+            console.error('Textarea element not found');
+            alert('エラーが発生しました');
+            return;
+        }
+
+        const cursorPos = textarea.selectionStart;
+        const textBefore = data.content.substring(0, cursorPos);
+        const textAfter = data.content.substring(cursorPos);
+        const linkMarkdown = `[${selectedPost.title}](/posts/${selectedPost.slug})`;
+
+        setData('content', textBefore + linkMarkdown + textAfter);
+
+        // カーソル位置をリンクの後ろに移動
+        setTimeout(() => {
+            textarea.focus();
+            const newCursorPos = cursorPos + linkMarkdown.length;
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+        }, 0);
+
+        setIsLinkModalOpen(false);
+    };
+
     return (
-        <AuthenticatedLayout
+        <>
+            <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">記事編集</h2>
             }
@@ -167,24 +195,33 @@ export default function Edit({ post, categories, tags }) {
                                 <div>
                                     <div className="flex justify-between items-center mb-2">
                                         <InputLabel htmlFor="content" value="本文（元ネタ）" />
-                                        <button
-                                            type="button"
-                                            onClick={handleGenerateArticle}
-                                            disabled={generating || !data.title || !data.content}
-                                            className="inline-flex items-center rounded-md bg-purple-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                                        >
-                                            {generating ? (
-                                                <>
-                                                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                    </svg>
-                                                    生成中...
-                                                </>
-                                            ) : (
-                                                '✨ AIで記事を生成'
-                                            )}
-                                        </button>
+                                        <div className="flex gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsLinkModalOpen(true)}
+                                                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                                            >
+                                                🔗 記事リンク挿入
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={handleGenerateArticle}
+                                                disabled={generating || !data.title || !data.content}
+                                                className="inline-flex items-center rounded-md bg-purple-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                            >
+                                                {generating ? (
+                                                    <>
+                                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                        </svg>
+                                                        生成中...
+                                                    </>
+                                                ) : (
+                                                    '✨ AIで記事を生成'
+                                                )}
+                                            </button>
+                                        </div>
                                     </div>
                                     <textarea
                                         id="content"
@@ -270,5 +307,14 @@ export default function Edit({ post, categories, tags }) {
                 </div>
             </div>
         </AuthenticatedLayout>
+
+        {/* Post Link Modal */}
+        <PostLinkModal
+            isOpen={isLinkModalOpen}
+            onClose={() => setIsLinkModalOpen(false)}
+            posts={allPosts || {}}
+            onSelectPost={handleInsertLink}
+        />
+        </>
     );
 }

@@ -116,10 +116,25 @@ class PostController extends Controller
         $categories = Category::orderBy('order')->get();
         $tags = Tag::orderBy('name')->get();
 
+        // 他の記事一覧を取得（カテゴリ順 + 更新日順）
+        $allPosts = Post::with('category')
+            ->where('id', '!=', $post->id) // 現在編集中の記事を除外
+            ->published() // 公開済みのみ（published_atも考慮）
+            ->orderBy('category_id')
+            ->orderBy('updated_at', 'desc')
+            ->limit(100) // パフォーマンス対策
+            ->get(['id', 'title', 'slug', 'category_id', 'updated_at']);
+
+        // カテゴリごとにグループ化
+        $postsByCategory = $allPosts->groupBy(function($item) {
+            return $item->category ? $item->category->name : '未分類';
+        });
+
         return Inertia::render('Admin/Posts/Edit', [
             'post' => $post,
             'categories' => $categories,
             'tags' => $tags,
+            'allPosts' => $postsByCategory,
         ]);
     }
 
